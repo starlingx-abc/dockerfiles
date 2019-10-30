@@ -1,0 +1,16 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  - DOCKERFILE_DIR=stx-build
+  - DOCKERFILE_DIR=vm-in-container
+
+script:
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then DOCKER_IMG_TAG="latest"; else DOCKER_IMG_TAG="$TRAVIS_BRANCH"; fi
+  - cd $DOCKERFILE_DIR
+  - docker build -t starlingxabc/$DOCKERFILE_DIR:$DOCKER_IMG_TAG .
+  - docker push starlingxabc/$DOCKERFILE_DIR:$DOCKER_IMG_TAG
+  - cd ..
