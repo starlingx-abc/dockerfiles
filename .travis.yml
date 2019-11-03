@@ -6,6 +6,7 @@ services:
 env:
   - DOCKERFILE_DIR=stx-build
   - DOCKERFILE_DIR=vm-in-container
+  - DOCKERFILE_DIR=ubuntu-dev
 
 script:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
