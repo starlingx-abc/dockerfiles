@@ -17,6 +17,7 @@ RUN pip3 install --upgrade \
     pip \
     bcrypt \
     flask flask_login flask_migrate flask_wtf flask_sqlalchemy \
-    gunicorn
+    gunicorn \
+    kubernetes
 
 EXPOSE 22
