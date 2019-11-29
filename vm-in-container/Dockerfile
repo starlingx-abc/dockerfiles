@@ -22,16 +22,16 @@ RUN apt-get -y update \
 		expect net-tools bridge-utils iptables inetutils-ping dnsmasq nginx \
 		supervisor xfce4 xfce4-terminal locales ttf-wqy-zenhei xterm firefox vnc4server \
 		python python-dev python-pip python3-pip python3-venv \
-		pkg-config libvirt-dev ipmitool \
+		pkg-config libvirt-dev ipmitool icedtea-plugin \
 		virt-manager libvirt-bin qemu-system qemu-utils
-
-RUN pip install --upgrade virtualbmc
 
 RUN update-ca-certificates \
 	&& locale-gen en_US.UTF-8 \
 	&& echo "root:123456" | chpasswd \
 	&& sed 's/#PasswordAuthentication.*/PasswordAuthentication yes/g' -i /etc/ssh/sshd_config \
 	&& sed 's/PermitRootLogin.*/PermitRootLogin yes/g' -i /etc/ssh/sshd_config
+
+RUN pip install --upgrade virtualbmc
 
 RUN systemctl mask nptd avahi-daemon avahi-daemon.socket systemd-udevd.service udisks2.service
 
