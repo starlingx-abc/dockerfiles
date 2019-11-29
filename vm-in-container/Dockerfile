@@ -18,11 +18,14 @@ RUN systemctl set-default multi-user.target
 
 RUN apt-get -y update \
 	&& apt-get install -y \
-		ca-certificates sudo wget curl vim git ntpdate unzip bzip2 gnutls-bin genisoimage openssh-server screen \
-		expect net-tools bridge-utils iptables inetutils-ping \
+		ca-certificates sudo wget curl vim git repo ntpdate unzip bzip2 gnutls-bin genisoimage openssh-server screen \
+		expect net-tools bridge-utils iptables inetutils-ping dnsmasq nginx \
 		supervisor xfce4 xfce4-terminal locales ttf-wqy-zenhei xterm firefox vnc4server \
-		python python-dev \
+		python python-dev python-pip python3-pip python3-venv \
+		pkg-config libvirt-dev ipmitool \
 		virt-manager libvirt-bin qemu-system qemu-utils
+
+RUN pip install --upgrade virtualbmc
 
 RUN update-ca-certificates \
 	&& locale-gen en_US.UTF-8 \
